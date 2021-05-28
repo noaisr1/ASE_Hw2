@@ -48,8 +48,21 @@
                 image.setAttribute('src', `${arr[i].img}`);
                 link.appendChild(image);
                 item.appendChild(link);
-                item.appendChild(document.createTextNode("id: "+ `${arr[i].id}`+ "\n" + "Name: "+ `${arr[i].name}`+ "\n" + "Type: "+ `${arr[i].type}`));
-                item.setAttribute('style',"border: 1px solid black; padding:10px; text-align:center;")
+                // Creating <p> element
+                var pok_data=document.createElement('p');
+                var id_txt=document.createTextNode("id: "+ `${arr[i].id}`);
+                var name_txt=document.createTextNode("Name: "+ `${arr[i].name}`);
+                var types_txt=document.createTextNode("Type: "+ `${arr[i].type}`);
+                
+                // Appending text to <p> element
+                pok_data.appendChild(id_txt);
+                pok_data.appendChild(document.createElement("br"));
+                pok_data.appendChild(name_txt);
+                pok_data.appendChild(document.createElement("br"));
+                pok_data.appendChild(types_txt);
+                item.appendChild(pok_data);
+                // Designing each item in list
+                item.setAttribute('style',"border: 1px solid black; padding:20px;")
                 list.appendChild(item);
             }
             return list;

@@ -33,10 +33,15 @@ h2{
     width: fit-content;
 }
 
-
-img{
-    width: 15%;
-    height: auto;
+p{
     
+    margin-left: 100px;
+}
+img{
+    position: relative;
+    width: 20%;
+    height: 20%;
+    margin-right: 40px;
+    float: left;
 
 }
