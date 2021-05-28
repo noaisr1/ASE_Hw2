@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="/css/all_pokemons.css" />
     <title>All Pokemons</title>
     <h1>All Pokemons:</h1>
 </head>
@@ -24,7 +24,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <div id="main_list">
+                                <div id="main_list" class="mx-auto">
 
                                 </div>
                             </td>
@@ -43,7 +43,7 @@
                 var image = document.createElement('img');
                 var link = document.createElement('a');
                 var id_str = `${arr[i].id}`.padStart(3, '0');
-                var id_path = '/pokemons' + `${id_str}`;
+                var id_path = '/pokemons/' + `${id_str}`;
                 link.setAttribute('href', id_path);
                 image.setAttribute('src', `${arr[i].img}`);
                 link.appendChild(image);
@@ -68,7 +68,7 @@
             return list;
         }
         async function myDisplay() {
-            var pokemons = await fetch('/api/get_pokemons').then(response => response.json());
+            var pokemons = await fetch('/api/pokemons').then(response => response.json());
             makeUL(pokemons);
         };
         myDisplay();

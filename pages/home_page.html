@@ -1,25 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/mystyle.css"/>
-    <title>Home Page - Pokemon</title>
-    <h1>Title</h1>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" type="text/css" href="/css/home_page.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Pokemon Home Page</title>
+    <h1>Welcome to Pokemon website!</h1>
 </head>
+
 <body>
-    <p class="main_desc">
-        Here is the description of the main page
-    </p>
-    <div class="wrapper">
-        <button class="view_all_btn">
-            View all pokemons
-        </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p>
+                    Welcome to Pokemon website! <br />
+                    Here you will have a look of all Pokemons
+                    and it's attributes
+                </p>
+                <div class="btn_wrapper">
+                    <button id="view_all_btn" class="view_all_btn">
+                        View all Pokemons
+                    </button>
+                </div>
+                <div class="top3_wrapper">
+                    <h3>
+                        Top 3 Pokemons:
+                    </h3>
+                </div>
+            </div>
+        </div>
     </div>
-    <h2>Top pokemons:</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-image">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div id="top3_list" class="mx-auto">
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     <script>
-        
+        async function myDisplay(pokemons) {
+            var pokemons = await fetch('/api/top3').then(response => response.json());
+            var list = document.getElementById("top3_list");
+            for (i = 0; i < pokemons.length; i++) {
+                var item = document.createElement('div');
+                var image = document.createElement('img');
+                var link = document.createElement('a');
+                var id_str = `${pokemons[i].id}`.padStart(3, '0');
+                var id_path = '/pokemons/' + `${id_str}`;
+                link.setAttribute('href', id_path);
+                image.setAttribute('src', `${pokemons[i].img}`);
+                link.appendChild(image);
+                item.appendChild(link);
+                var pok_data = document.createElement('p');
+                var id_txt = document.createTextNode("id: " + `${pokemons[i].id}`);
+                var name_txt = document.createTextNode("Name: " + `${pokemons[i].name}`);
+                var types_txt = document.createTextNode("Type: " + `${pokemons[i].type}`);
+
+                pok_data.appendChild(id_txt);
+                pok_data.appendChild(document.createElement("br"));
+                pok_data.appendChild(name_txt);
+                pok_data.appendChild(document.createElement("br"));
+                pok_data.appendChild(types_txt);
+                item.appendChild(pok_data);
+
+                item.setAttribute('style', "border: 1px solid black; padding:20px;")
+                list.appendChild(item);
+            }
+        };
+        const btn = document.getElementById("view_all_btn");
+        btn.onclick = function() {
+            location.href = '/pokemons';
+        }
+        myDisplay();
     </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

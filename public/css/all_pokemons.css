@@ -29,12 +29,11 @@ h2{
     border: 2px solid black;
     padding: 5px;
     overflow: auto;
-    height: 500px;
+    height: 550px;
     width: fit-content;
 }
 
 p{
-    
     margin-left: 100px;
 }
 img{

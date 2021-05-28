@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" type="text/css" href="/css/pokemon_profile.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Pokemon profile</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="pok_profile"></div>
+                <h2 id="pok_title"></h2>
+                <img>
+                <h3 id="pok_type"></h3>
+                <table class="table" id="base">
+                    <thead>
+                        <tr>
+                            <th scope="col">HP</th>
+                            <th scope="col">Attack</th>
+                            <th scope="col">Defense</th>
+                            <th scope="col">Sp.Attack</th>
+                            <th scope="col">sp.Defense</th>
+                            <th scope="col">Speed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="HP"></td>
+                            <td id="Attack"></td>
+                            <td id="Defense"></td>
+                            <td id="Sp.Attack"></td>
+                            <td id="Sp.Defense"></td>
+                            <td id="Speed"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Getting path for specific pokemon:
+        var path = window.location.pathname;
+        function makeProfile(data) {
+            var div = document.getElementById('pok_profile');
+            var title = document.getElementById('pok_title');
+            var image = document.querySelector('img');
+            var type = document.getElementById('pok_type');
+            var HP = document.getElementById("HP");
+            var Attack = document.getElementById('Attack');
+            var Defense = document.getElementById('Defense');
+            var Sp_Attack = document.getElementById('Sp.Attack');
+            var Sp_Defense = document.getElementById("Sp.Defense");
+            var Speed = document.getElementById("Speed");
+            let base = Object.values(data.base);
+            HP.innerText = ""+`${base[0]}`;
+            Attack.innerText = ""+`${base[1]}`;
+            Defense.innerText = ""+`${base[2]}`;
+            Sp_Attack.innerText = ""+`${base[3]}`;
+            Sp_Defense.innerText = ""+`${base[4]}`;
+            Speed.innerText = ""+`${base[5]}`;
+            var id_str = `${data.id}`;
+            var type_str = `${data.type}`;
+            image.setAttribute('src', `${data.img}`);
+            var title_txt = document.createTextNode("#id " + `${data.id}` + " " + `${data.name}`);
+            var type_txt = document.createTextNode(type_str);
+            title.appendChild(title_txt);
+            type.appendChild(type_txt);
+            // Designing each item in list
+            div.appendChild(title);
+            div.appendChild(image);
+            div.appendChild(type);
+
+
+        }
+        async function myDisplay() {
+            console.log(path);
+            var pokemon = await fetch('/api' + path).then(response => response.json());
+            makeProfile(pokemon);
+        };
+        myDisplay();
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

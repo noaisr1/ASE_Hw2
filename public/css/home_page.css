@@ -1,0 +1,41 @@
+h1{
+    text-align: center;
+}
+p{
+    text-align: center;
+}
+h3{
+    text-align: center;
+}
+.btn_wrapper{
+    text-align: center;
+    margin-top:40px;
+}
+.top3_wrapper{
+    margin-top:40px;
+}
+.view_all_btn{
+    background-color: cornflowerblue;
+    border: 2px solid black;
+    padding: 5px;
+    width: 300px;
+}
+p{
+    margin-left: 100px;
+}
+img{
+    position: relative;
+    width: 20%;
+    height: 20%;
+    margin-right: 40px;
+    float: left;
+
+}
+#top3_list{
+    background-color: lightblue;
+    border: 2px solid black;
+    padding: 5px;
+    overflow: auto;
+    height: 300px;
+    width: fit-content;
+}
