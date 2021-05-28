@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css" />
+    <title>All Pokemons</title>
+    <h1>All Pokemons:</h1>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12" >
+                <table class="table table-image">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div id="main_list">
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script >
+        function makeUL(arr) {
+            var list = document.getElementById("main_list");
+
+            for (var i = 0; i < arr.length; i++) {
+                var item = document.createElement('div');
+                var image = document.createElement('img');
+                var link = document.createElement('a');
+                var id_str = `${arr[i].id}`.padStart(3, '0');
+                var id_path = '/pokemons' + `${id_str}`;
+                link.setAttribute('href', id_path);
+                image.setAttribute('src', `${arr[i].img}`);
+                link.appendChild(image);
+                item.appendChild(link);
+                item.appendChild(document.createTextNode("id: "+ `${arr[i].id}`+ "\n" + "Name: "+ `${arr[i].name}`+ "\n" + "Type: "+ `${arr[i].type}`));
+                item.setAttribute('style',"border: 1px solid black; padding:10px; text-align:center;")
+                list.appendChild(item);
+            }
+            return list;
+        }
+        async function myDisplay() {
+            var pokemons = await fetch('/api/get_pokemons').then(response => response.json());
+            makeUL(pokemons);
+        };
+        myDisplay();
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
